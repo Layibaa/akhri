@@ -1,3 +1,20 @@
+// The AuthController manages:
+// Registering a user (adding them to the database).
+// Logging in a user (verifying credentials and returning access tokens).
+// This controller uses:
+// bcrypt for password encryption.
+// jsonwebtoken (JWT) for creating secure tokens to identify users.
+// MongoDB (via Mongoose) to interact with the database.
+// a. registerUser: For User Registration
+// What it does:
+// Allows new users to create accounts by providing their details like username, password, and name.
+// Flow:
+// Check if all required fields (username, password, firstname, lastname) are provided.
+// Hash the password using bcrypt to securely store it.
+// Check if the username already exists.
+// Save the user in the database.
+// Generate a JWT token (a digital signature for secure communication).
+
 import UserModel from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -25,7 +42,8 @@ export const registerUser = async (req, res) => {
 
     // Save new user
     const user = await newUser.save();
-    const token = jwt.sign(
+    //Generate a JWT token for the user
+    const token = jwt.sign( 
       { username: user.username, id: user._id },
       process.env.JWTKEY,
       { expiresIn: "1h" }

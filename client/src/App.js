@@ -3,8 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth/Auth";
 import Profile from "./pages/Profile/Profile";
-import { useSelector } from "react-redux";
-import Chat from "./pages/Chat/Chat";
+import { useSelector } from "react-redux"; 
 
 function App() {
   const user = useSelector((state) => state.authReducer.authData);
@@ -12,10 +11,7 @@ function App() {
     <div
       className="App"
       style={{
-        height:
-          window.location.href === "http://localhost:3000/chat"
-            ? "calc(100vh - 2rem)"
-            : "auto",
+        height: "auto",
       }}
     >
       <div className="blur" style={{ top: "-18%", right: "0" }}></div>
@@ -44,11 +40,6 @@ function App() {
               <p>There's nothing here!</p>
             </main>
           }
-        />
-
-        <Route
-          path="/chat"
-          element={user ? <Chat /> : <Navigate to="../auth" />}
         />
       </Routes>
     </div>
